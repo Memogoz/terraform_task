@@ -1,12 +1,4 @@
 #!/bin/bash
-# Update package list and install Apache
-sudo apt-get update -y
-sudo apt-get install -y apache2
-
-# Enable and start Apache
-sudo systemctl enable apache2
-sudo systemctl start apache2
-
 # Get the instance's local IP address using IMDSv2
 # First, get a session token
 TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
