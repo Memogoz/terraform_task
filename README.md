@@ -32,8 +32,9 @@ The infrastructure created by this project consists of the following components:
     - Run a `user_data` script (`website-script.sh`) on instance launch for final configurations.
     - Automatically register new instances with the ALB's target group.
 6.  **Security Groups**:
-    - An ALB Security Group that allows inbound HTTP traffic from anywhere (`0.0.0.0/0`).
+    - An ALB Security Group that allows inbound HTTP traffic from a specific CIDR block (`201.163.120.0/24`).
     - A Web Server Security Group that allows inbound traffic from the ALB, ensuring instances are not directly exposed to the internet.
+    - A Builder Security Group that allows SSH access from a specific CIDR block (`201.163.120.0/24`), providing secure access to the builder instance.
 7.  **S3 Backend**: Terraform state is stored in a designated S3 bucket, enabling collaboration and state locking.
 
 ## Prerequisites
@@ -79,31 +80,16 @@ Before you begin, ensure you have the following installed and configured:
 
 ### Deploying the Infrastructure
 
-1.  **Initialize Terraform**
-    This command downloads the necessary provider plugins and initializes the backend.
+To deploy the infrastructure, navigate to the project directory in your terminal and run the following commands:
 
-    ```sh
-    terraform init
-    ```
-
-2.  **Plan the Deployment**
-    (Optional) This command shows you what resources Terraform will create, modify, or destroy.
-
-    ```sh
-    terraform plan
-    ```
-
-3.  **Apply the Configuration**
-    This command builds and deploys the resources on AWS. You will be prompted to confirm the action.
-
-    ```sh
-    terraform apply
-    ```
-    Enter `yes` when prompted. The deployment may take several minutes, as the EC2 Image Builder pipeline needs time to create the custom AMI.
+```sh
+terraform init
+terraform apply
+```
 
 ### Destroying the Infrastructure
 
-To tear down all the resources created by this project, run the following command. You will be prompted for confirmation.
+To tear down all the resources created by this project, run the following command:
 
 ```sh
 terraform destroy
@@ -122,5 +108,4 @@ This project is organized into several reusable Terraform modules:
 
 After a successful `terraform apply`, the following output will be displayed:
 
-- **`url`**: The public DNS name of the Application Load Balter. You can paste this URL into your browser to access the deployed web application.
-
+- **`url`**: The public DNS name of the Application Load Balancer. You can paste this URL into your browser to access the deployed web application.
