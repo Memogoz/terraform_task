@@ -1,34 +1,34 @@
 variable "prefix" {
-    type = string
-    default = "ggonz-task"
+  type    = string
+  default = "ggonz-task"
 }
 
 variable "web_ami_id" {
-    type = string
+  type = string
 }
 
 variable "instance_type" {
-    type = string
-    default = "t3.small"
+  type    = string
+  default = "t3.small"
 }
 
 variable "subnet_ids" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "alb_target_group_arns" {
-    type = list(string)
+  type = list(string)
 }
 
 variable "desired_count" {
-    type = number
-    default = 3
+  type    = number
+  default = 3
 }
 
 variable "user_data" {
-    type = string  
+  type = string
 }
 
 variable "web_sg_ids" {
-    type = list(string)
+  type = list(string)
 }
